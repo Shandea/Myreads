@@ -34,22 +34,18 @@ function App() {
   };
 
   const updateSearch = async (e) => {
-    // const handleChange = (e) => {
-    //   setSearchResults(e.target.value);
-    //   if (e.target.value === "") {
-    //     setSearchResults(false);
-    //   } else {
-    //     setSearchResults(true);
-    //   }
-    // };
     console.log(e.target.value);
-    const res = await BookAPI.search(e.target.value, 3);
-    console.log(res);
-
-    setSearchResults(res);
+    if (!e.target.value) {
+      setSearchResults([]);
+    } else {
+      const res = await BookAPI.search(e.target.value, 3);
+      res.forEach((item) => {
+        if (item.imageLinks === undefined) item["imageLinks"] = "";
+      });
+      if (res.error) setSearchResults([]);
+      else setSearchResults(res);
+    }
   };
-
-
 
   return (
     <div className="app">
