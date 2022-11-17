@@ -45,8 +45,6 @@ const Book = ({ book, index, onUpdateBook }) => {
     </li>
   );
 
-  // return (
-  //  <div> {props.book.title} </div>
 };
 
 export default Book;

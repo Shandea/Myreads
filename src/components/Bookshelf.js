@@ -30,16 +30,9 @@ const Bookshelf = ({shelf, collection, onUpdateBook}) => {
        </ol> 
        </div>
        </div>
-    // // <ol>
-    //   {/* {props.books.map((book) => (
-    //     <li key={book.id}>
-    //       <Book book = {book} />
-    //     </li>
-    //   ))}
-    // </ol> */}
   
   );
 
-};
+}
 
 export default Bookshelf;
