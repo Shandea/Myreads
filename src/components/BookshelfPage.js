@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Bookshelf from "./Bookshelf";
 import * as BookAPI from "../BooksAPI";
 import SearchPage from "./SearchPage";
+import { Link } from "react-router-dom"
 
 function BookshelfPage() {
     const [showSearchPage, setShowSearchpage] = useState(false);
@@ -57,9 +58,10 @@ function BookshelfPage() {
               />
             </div>
             <div className="open-search">
-              <a onClick={() => setShowSearchpage(!showSearchPage)}>
-                Add a book
-              </a>
+            <Link to="/search">
+              {/* onClick={() => setShowSearchpage(!showSearchPage)}> */}
+              <a>Add a book</a>
+            </Link>
             </div>
           </div>
         </div>
