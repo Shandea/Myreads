@@ -1,9 +1,8 @@
 import "../App.css";
 import { useState, useEffect } from "react";
-import Bookshelf from "./Bookshelf";
 import Book from "./Book";
 import * as BookAPI from "../BooksAPI";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function SearchPage() {
   const [showSearchPage, setShowSearchpage] = useState(false);
@@ -23,7 +22,7 @@ function SearchPage() {
 
       return searchResult;
     });
-
+console.log(updatedSearchBooks)
     setSearchResults(updatedSearchBooks);
 
     e.target.value = "";
@@ -37,11 +36,14 @@ function SearchPage() {
       setSearchResults([]);
     } else {
       const res = await BookAPI.search(e.target.value, 3);
-      res.forEach((item) => {
-        if (item.imageLinks === undefined) item["imageLinks"] = "";
-      });
+      console.log(res);
       if (res.error) setSearchResults([]);
-      else setSearchResults(res);
+      else {
+        res.forEach((item) => {
+          if (item.imageLinks === undefined) item["imageLinks"] = "";
+        });
+        setSearchResults(res);
+      }
     }
   };
 
@@ -49,14 +51,14 @@ function SearchPage() {
     <div className="app">
       <div className="search-books">
         <div className="search-books-bar">
-            <Link to="/">
-          <a
-            className="close-search"
-            onClick={() => setShowSearchpage(!showSearchPage)}
-          >
-            Close
-          </a>
-          </ Link>
+          <Link to="/">
+            <a
+              className="close-search"
+              onClick={() => setShowSearchpage(!showSearchPage)}
+            >
+              Close
+            </a>
+          </Link>
           <div className="search-books-input-wrapper">
             <input
               onChange={updateSearch}

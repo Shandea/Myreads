@@ -1,4 +1,5 @@
 const Book = ({ book, index, onUpdateBook }) => {
+  console.log(book.shelf ==="currentlyReading")
   return (
     <li key={index}>
       <div className="book">
@@ -12,20 +13,17 @@ const Book = ({ book, index, onUpdateBook }) => {
             }}
           ></div>
           <div className="book-shelf-changer">
-            <select onChange={(e) => onUpdateBook(e, book)}>
-            <option value="" disabled>
-               Move Too..
-              </option>
-              <option value="None" selected = {!book.shelf}>
+            <select  onChange={(e) => onUpdateBook(e, book)}>
+              <option value="None" selected={!book.shelf}>
                 None
               </option>
-              <option value="currentlyReading" selected = {book.shelf ==="currentlyReading"}>
+              <option value="currentlyReading" selected={book.shelf ==="currentlyReading"}>
                 Currently Reading
               </option>
-              <option value="wantToRead" selected = {book.shelf ==="wantToRead"}>
+              <option value="wantToRead" selected={book.shelf ==="wantToRead"}>
                 Want To Read
               </option>
-              <option value="read" selected = {book.shelf ==="read"}>
+              <option value="read" selected={book.shelf ==="read"}>
                 Read
               </option>
             </select>
