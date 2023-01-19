@@ -2,11 +2,9 @@ import "../App.css";
 import { useState, useEffect } from "react";
 import Bookshelf from "./Bookshelf";
 import * as BookAPI from "../BooksAPI";
-// import SearchPage from "./SearchPage";
 import { Link } from "react-router-dom"
 
 function BookshelfPage() {
-    // const [showSearchPage, setShowSearchpage] = useState(false);
   const [booksCollection, setBooksCollection] = useState([]);
 
   useEffect(() => {

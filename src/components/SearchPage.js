@@ -22,12 +22,8 @@ function SearchPage() {
 
       return searchResult;
     });
-console.log(updatedSearchBooks)
+    console.log(updatedSearchBooks);
     setSearchResults(updatedSearchBooks);
-
-    e.target.value = "";
-
-    // updating search so it stays on shelf after seletced in drop down
   };
 
   const updateSearch = async (e) => {
@@ -39,10 +35,17 @@ console.log(updatedSearchBooks)
       console.log(res);
       if (res.error) setSearchResults([]);
       else {
-        res.forEach((item) => {
-          if (item.imageLinks === undefined) item["imageLinks"] = "";
-        });
-        setSearchResults(res);
+       const newRes = await Promise.all(res.map( async (item) => {
+          const book = await BookAPI.get(item.id)
+          return {
+            ...item, 
+            shelf: book.shelf
+          }
+
+        }));
+        console.log(newRes)
+        setSearchResults(newRes);
+  
       }
     }
   };
