@@ -1,5 +1,5 @@
 import "../App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Book from "./Book";
 import * as BookAPI from "../BooksAPI";
 import { Link } from "react-router-dom";
@@ -35,17 +35,17 @@ function SearchPage() {
       console.log(res);
       if (res.error) setSearchResults([]);
       else {
-       const newRes = await Promise.all(res.map( async (item) => {
-          const book = await BookAPI.get(item.id)
-          return {
-            ...item, 
-            shelf: book.shelf
-          }
-
-        }));
-        console.log(newRes)
+        const newRes = await Promise.all(
+          res.map(async (item) => {
+            const book = await BookAPI.get(item.id);
+            return {
+              ...item,
+              shelf: book.shelf,
+            };
+          })
+        );
+        console.log(newRes);
         setSearchResults(newRes);
-  
       }
     }
   };
@@ -54,13 +54,12 @@ function SearchPage() {
     <div className="app">
       <div className="search-books">
         <div className="search-books-bar">
-          <Link to="/">
-            <a
-              className="close-search"
-              onClick={() => setShowSearchpage(!showSearchPage)}
-            >
-              Close
-            </a>
+          <Link
+            to="/"
+            className="close-search"
+            onClick={() => setShowSearchpage(!showSearchPage)}
+          >
+            Close
           </Link>
           <div className="search-books-input-wrapper">
             <input
